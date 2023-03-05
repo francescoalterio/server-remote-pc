@@ -2,7 +2,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 
-import MoveCursor from "./robot";
+import { click, moveCursor } from "./src/robot";
 
 const app = express();
 const server = http.createServer(app);
@@ -12,34 +12,26 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/test.html");
 });
 
-let interval: any;
-
 io.on("connection", (socket) => {
   console.log("a user connected");
 
   socket.on("up", (msg) => {
-    clearInterval(interval);
-    interval = setInterval(() => MoveCursor("up"), 10);
-    console.log("up");
+    moveCursor("up");
   });
   socket.on("left", (msg) => {
-    clearInterval(interval);
-    interval = setInterval(() => MoveCursor("left"), 10);
-    console.log("left");
+    moveCursor("left");
   });
   socket.on("right", (msg) => {
-    clearInterval(interval);
-    interval = setInterval(() => MoveCursor("right"), 10);
-    console.log("right");
+    moveCursor("right");
   });
   socket.on("down", (msg) => {
-    clearInterval(interval);
-    interval = setInterval(() => MoveCursor("down"), 10);
-    console.log("down");
+    moveCursor("down");
   });
   socket.on("cancel", (msg) => {
-    clearInterval(interval);
-    console.log("cancel");
+    moveCursor("cancel");
+  });
+  socket.on("click", (msg) => {
+    click();
   });
 });
 
