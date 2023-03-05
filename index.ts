@@ -18,19 +18,23 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 
   socket.on("up", (msg) => {
-    interval = setInterval(() => MoveCursor("up"), 1);
+    clearInterval(interval);
+    interval = setInterval(() => MoveCursor("up"), 10);
     console.log("up");
   });
   socket.on("left", (msg) => {
-    interval = setInterval(() => MoveCursor("left"), 1);
+    clearInterval(interval);
+    interval = setInterval(() => MoveCursor("left"), 10);
     console.log("left");
   });
   socket.on("right", (msg) => {
-    interval = setInterval(() => MoveCursor("right"), 1);
+    clearInterval(interval);
+    interval = setInterval(() => MoveCursor("right"), 10);
     console.log("right");
   });
   socket.on("down", (msg) => {
-    interval = setInterval(() => MoveCursor("down"), 1);
+    clearInterval(interval);
+    interval = setInterval(() => MoveCursor("down"), 10);
     console.log("down");
   });
   socket.on("cancel", (msg) => {

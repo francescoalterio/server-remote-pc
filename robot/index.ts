@@ -16,7 +16,6 @@ function setDirection(direction: Direction): { x: number; y: number } {
 }
 
 export default function move(direction: Direction) {
-  console.log("MOVE CURSOR FUNCTION");
   const { x, y } = setDirection(direction);
   robot.moveMouse(x, y);
 }
