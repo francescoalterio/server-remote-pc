@@ -2,7 +2,7 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 
-import { click, moveCursor, scroll } from "./src/robot";
+import { click, moveCursor, scroll, write } from "./src/robot";
 
 const app = express();
 const server = http.createServer(app);
@@ -44,6 +44,13 @@ io.on("connection", (socket) => {
   socket.on("cancelScroll", (msg) => {
     console.log("CANCEL");
     scroll("cancel");
+  });
+  socket.on("write", (msg) => {
+    if (msg === " ") {
+      write("space");
+    } else {
+      write(msg);
+    }
   });
 });
 
